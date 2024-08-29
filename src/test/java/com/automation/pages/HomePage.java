@@ -11,15 +11,29 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//android.widget.ImageButton[@content-desc=\"Navigate up\"]")
     WebElement loginCloseClick;
 
-    @FindBy(xpath = "//android.widget.TextView[@resource-id=\"com.booking:id/facet_entry_point_item_label\" and @text=\"Stays\"]")
-    WebElement staysBtn;
+    @FindBy(xpath = "//android.widget.TextView[@text='Stays']")
+    WebElement staysClick;
+
+    @FindBy(xpath = "//android.widget.TextView[@text='Attractions']")
+    WebElement attractionsClick;
 
     public void openApplication(){
-        notificationOffBtn.click();
-        loginCloseClick.click();
+        if(isPresent(notificationOffBtn)){
+            notificationOffBtn.click();
+        }
+        if(isPresent(loginCloseClick)) {
+            loginCloseClick.click();
+        }
     }
 
     public boolean verifyHomePageIsDisplayed(){
-        return isPresent(staysBtn);
+        return isPresent(staysClick);
+    }
+
+    public void clickAttractions() {
+        int startX = staysClick.getLocation().getX();
+        int startY = staysClick.getLocation().getY();
+        //scrollOrSwipe(startX,0,,0);
+        attractionsClick.click();
     }
 }

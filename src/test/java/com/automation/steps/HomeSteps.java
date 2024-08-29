@@ -16,4 +16,8 @@ public class HomeSteps {
         Assert.assertTrue(homePage.verifyHomePageIsDisplayed());
     }
 
+    @When("user click on attractions")
+    public void userClickOnAttractions() {
+        homePage.clickAttractions();
+    }
 }
