@@ -18,7 +18,6 @@ public class DriverManager {
         capabilities.setCapability("app", System.getProperty("user.dir") + ConfigReader.getConfigValue("app.path"));
         capabilities.setCapability("appActivity", ConfigReader.getConfigValue("app.activity"));
         capabilities.setCapability("appPackage", ConfigReader.getConfigValue("app.package"));
-        capabilities.setCapability("orientation","LANDSCAPE");
 
         driver = new AndroidDriver(capabilities);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
