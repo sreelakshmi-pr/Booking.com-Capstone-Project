@@ -20,7 +20,7 @@ public class DriverManager {
         capabilities.setCapability("appPackage", ConfigReader.getConfigValue("app.package"));
 
         driver = new AndroidDriver(capabilities);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
     }
 
     public static AppiumDriver getDriver() {
