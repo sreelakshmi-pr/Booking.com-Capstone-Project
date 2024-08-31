@@ -2,6 +2,8 @@ package com.automation.pages;
 
 import com.automation.utils.DriverManager;
 import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.interactions.PointerInput;
@@ -13,6 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class BasePage {
 
@@ -22,7 +25,7 @@ public class BasePage {
     BasePage() {
         driver = DriverManager.getDriver();
         PageFactory.initElements(driver, this);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(50));
     }
 
     public boolean isPresent(WebElement element) {
@@ -35,7 +38,7 @@ public class BasePage {
     }
     public boolean isPresents(WebElement element) {
         try {
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             return true;
         } catch (Exception e) {
             return false;
@@ -65,12 +68,14 @@ public class BasePage {
         Sequence sequence = new Sequence(finger1, 1)
                 .addAction(finger1.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY))
                 .addAction(finger1.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
-                .addAction(new Pause(finger1, Duration.ofSeconds(2)))
+                .addAction(new Pause(finger1, Duration.ofSeconds(1)))
                 .addAction(finger1.createPointerMove(Duration.ofSeconds(1), PointerInput.Origin.viewport(), endX, endY))
                 .addAction(finger1.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
 
         driver.perform(Collections.singletonList(sequence));
     }
+
+
 
     public  void zoom(int startX, int startY){
         PointerInput finger1 = new PointerInput(PointerInput.Kind.TOUCH, "finger1");
@@ -90,7 +95,32 @@ public class BasePage {
         driver.perform(Arrays.asList(sequence1, sequence2));
     }
 
+    public  void dateSelection(String dateString,WebElement calender){
 
-}
+        boolean flag=true;
+        do {
+            try {
+                WebElement date = driver.findElement(By.xpath(dateString));
+                date.click();
+                flag = false;
+
+            } catch (Exception e) {
+                int x = calender.getLocation().getX();
+                int y = calender.getLocation().getY();
+                int cardWidth = calender.getSize().getWidth();
+                int cardHeight = calender.getSize().getHeight();
+
+                scrollOrSwipe(x + cardWidth/2, y + cardHeight-1, x+cardWidth/2, y );
+
+            }
+        }while (flag);
+
+    }
+
+
+
+    }
+
+
 
 
