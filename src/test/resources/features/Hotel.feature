@@ -56,6 +56,17 @@ Feature: Verify functionalities of stays booking
       And user select free cancellation
       Then verify the displayed hotels have the option of free cancellation
 
+      Scenario: update search location
+        When user enters location "Bangalore"
+        And user clicks select date
+        When user clicks on search
+        Then verify user is on hotels displayed page
+        When update location in to "Mumbai"
+        And clicks on search button
+        Then verify the location is updated with "Mumbai"
+
+
+
 
 
 

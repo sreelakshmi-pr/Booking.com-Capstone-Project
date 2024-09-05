@@ -141,4 +141,23 @@ public class HotelSteps {
     public void verifyTheDisplayedHotelsHaveTheOptionOfFreeCancellation() {
         Assert.assertTrue(hotelPage.hotelsHaveFreeCancellationOption());
     }
+
+    @And("update location in to {string}")
+    public void updateLocationInTo(String loc) {
+        hotelPage.updateLocation(loc);
+
+    }
+
+    @And("clicks on search button")
+    public void clicksOnSearchButton() {
+        hotelPage.clickOnUpdateSearchBtn();
+    }
+
+    @Then("verify the location is updated with {string}")
+    public void verifyTheLocationIsUpdatedWith(String loc) {
+        Assert.assertTrue(hotelPage.searchBoxIsUpdated(loc));
+
+    }
+
+
 }

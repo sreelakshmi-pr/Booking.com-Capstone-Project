@@ -131,36 +131,6 @@ public class HotelPage extends BasePage {
             }
         }
 
-//        if (childCount1 == child1) {
-//            System.out.println();
-//        } else {
-//            while (childCount1 != child1) {
-//                addChild.click();
-//                childCount1++;
-//            }
-//        }
-//        clickOnChildAge.click();
-//
-//            WebElement calender = driver.findElement(By.xpath("//android.widget.FrameLayout[@resource-id=\"com.booking:id/age_picker_view\"]"));
-//            waitForElementToBeClickable(calender);
-//
-//            boolean flag=true;
-//            do {
-//                try {
-//                    WebElement date = driver.findElement(By.xpath(String.format("//android.widget.Button[@text=\"'%s' year old\"]",childAge)));
-//                    date.click();
-//                    flag = false;
-//
-//                } catch (Exception e) {
-//                    int x = calender.getLocation().getX();
-//                    int y = calender.getLocation().getY();
-//                    int cardWidth = calender.getSize().getWidth();
-//                    int cardHeight = calender.getSize().getHeight();
-//
-//                    scrollOrSwipe(x + cardWidth/2, y + cardHeight-1, x+cardWidth/2, y+cardHeight-50 );
-//
-//                }
-//            }while (flag);
         doneBtn.click();
     }
 
@@ -439,6 +409,41 @@ public class HotelPage extends BasePage {
         }
         return flag;
     }
+    @FindBy(xpath = "//android.widget.ImageButton[@content-desc=\"Navigate up\"]/following-sibling::android.view.ViewGroup")
+    WebElement searchBox;
+    @FindBy(xpath = "(//android.widget.Button)[1]")
+    WebElement searchBox2;
+    @FindBy(xpath = "//android.widget.EditText")
+    WebElement enterNewLocation;
+    public void updateLocation(String loc) {
+         searchBox.click();
+         searchBox2.click();
+         enterNewLocation.sendKeys(loc);
+         String s = String.format("(//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View[1]//android.widget.TextView[contains(@text,'%s')])[1]",loc);
+         driver.findElement(By.xpath(s)).click();
+    }
+
+    @FindBy(xpath = "//android.widget.TextView[@text=\"Search\"]")
+    WebElement updateSearchBtn;
+    public void clickOnUpdateSearchBtn() {
+        updateSearchBtn.click();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @FindBy(xpath = "(//android.widget.ImageButton[@content-desc=\"Navigate up\"]/following-sibling::android.view.ViewGroup//android.widget.TextView)[1]")
+    WebElement updatedLoc;
+    public boolean searchBoxIsUpdated(String loc) {
+
+      return updatedLoc.getText().equals(loc);
+
+    }
+
+
 }
 
 
