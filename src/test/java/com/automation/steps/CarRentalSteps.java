@@ -125,4 +125,48 @@ public class CarRentalSteps {
     public void verifyProtectionAmountIsAddedToTotalRentalPrice() {
         Assert.assertTrue(carRentalPage.protectionAmountAddedWithRentalPrice());
     }
+
+    @And("user select price lowest first")
+    public void userSelectPriceLowestFirst() {
+        carRentalPage.clickOnPriceLowestFirst();
+    }
+
+    @Then("verify price is in lowest first order")
+    public void verifyPriceIsInLowestFirstOrder() {
+        Assert.assertTrue(carRentalPage.priceLowestFirst());
+    }
+
+    @And("user select automatic")
+    public void userSelectAutomatic() {
+        carRentalPage.clickOnAutomatic();
+
+    }
+
+    @Then("verify displayed cars are a automatic")
+    public void verifyDisplayedCarsAreAAutomatic() {
+        Assert.assertTrue(carRentalPage.carsAreAutomatic());
+
+    }
+
+    @And("user select fully electric")
+    public void userSelectFullyElectric() {
+        carRentalPage.clickOnFullyElectric();
+
+    }
+
+    @Then("verify displayed cars are a fully electric")
+    public void verifyDisplayedCarsAreAFullyElectric() {
+        Assert.assertTrue(carRentalPage.carsAreFullyElectric());
+    }
+
+    @And("user select {string} seat")
+    public void userSelectSeat(String seat) {
+        carRentalPage.selectSeat(seat);
+
+    }
+
+    @Then("verify displayed cars are {string} seater")
+    public void verifyDisplayedCarsAreSeater(String seat) {
+       Assert.assertTrue(carRentalPage.carsAreWithSelectedSeat(seat));
+    }
 }
